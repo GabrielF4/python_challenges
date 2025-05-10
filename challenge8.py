@@ -1,3 +1,7 @@
+#Challenge 8: Binary search tree
+
+#This class contains the attributes of value, a left node and a right node.
+# It also has recursive functions used to add elements, print the tree, check node depth and if tree is balanced
 class node:
     def __init__(self, value, left = None, right = None):
         self.value = value
@@ -22,6 +26,7 @@ class node:
             else:
                 self.right.add_node(value)
     
+    #Prints the nodes in order from lowest to highest with recursion
     def print_nodes(self):
         if(self.left):
             self.left.print_nodes()
@@ -31,6 +36,7 @@ class node:
         if(self.right):
             self.right.print_nodes()
 
+    #Recursive node search
     def node_search(self, value, debug = False):
         if debug:
             print(f"Node Search! {self.value}")
@@ -50,6 +56,7 @@ class node:
                 return True
         return False
     
+    #Prints the nodes with aditional information about each node. Used for debugging
     def print_node_structured(self):
         if self.left and self.right:
             print(f"NODE - value: {self.value}, left: {self.left.value}, right: {self.right.value}")
@@ -67,6 +74,7 @@ class node:
             
             print(f"LEAF NODE - value: {self.value}")
 
+    #Calculates depth of the tree recursively
     def node_depth(self):
 
         left_depth = 0
@@ -81,6 +89,7 @@ class node:
 
         return right_depth if right_depth > left_depth else left_depth
 
+    #Checks if tree is balanced recursively
     def node_balanced(self):
         left_depth = 0
         right_depth = 0
@@ -103,7 +112,7 @@ class node:
         
         return True
         
-
+#This class represent the tree. It only contains the startnode and the rest of the information of the tree exists within the nodes
 class tree:
     def __init__(self, start_node = None):
         self.start_node = start_node
