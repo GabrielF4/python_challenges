@@ -1,20 +1,22 @@
 #Challenge 8: Binary search tree
 
+from typing import Self
+
 #This class contains the attributes of value, a left node and a right node.
 # It also has recursive functions used to add elements, print the tree, check node depth and if tree is balanced
 class node:
-    def __init__(self, value, left = None, right = None):
+    def __init__(self, value: int, left: Self = None, right: Self = None):
         self.value = value
         self.left = left
         self.right = right
 
-    def set_left(self, node):
+    def set_left(self, node: Self):
         self.left = node
 
-    def set_right(self, node):
+    def set_right(self, node: Self):
         self.right = node
 
-    def add_node(self, value):
+    def add_node(self, value: int):
         if value < self.value:
             if not self.left:
                 self.set_left(node(value))
@@ -31,13 +33,13 @@ class node:
         if(self.left):
             self.left.print_nodes()
         
-        print(self.value)
+        print(self.value, end=" ")
         
         if(self.right):
             self.right.print_nodes()
 
     #Recursive node search
-    def node_search(self, value, debug = False):
+    def node_search(self, value: int, debug: bool = False) -> bool:
         if debug:
             print(f"Node Search! {self.value}")
         if self.value == value:
@@ -77,8 +79,8 @@ class node:
     #Calculates depth of the tree recursively
     def node_depth(self):
 
-        left_depth = 0
-        right_depth = 0
+        left_depth: int = 0
+        right_depth: int = 0
 
         if not self.left and not self.right:
             return 0
@@ -91,8 +93,8 @@ class node:
 
     #Checks if tree is balanced recursively
     def node_balanced(self):
-        left_depth = 0
-        right_depth = 0
+        left_depth: int = 0
+        right_depth: int = 0
 
         if not self.left and not self.right:
             return True
@@ -114,22 +116,25 @@ class node:
         
 #This class represent the tree. It only contains the startnode and the rest of the information of the tree exists within the nodes
 class tree:
-    def __init__(self, start_node = None):
+    def __init__(self, start_node: node = None):
         self.start_node = start_node
 
-    def add_node(self, value):
+    def add_node(self, value: int):
+        print(f"Adding node: {value}")
         if not self.start_node:
             self.start_node = node(value)
         else:
             self.start_node.add_node(value)
 
     def print_tree(self):
+        print("Printing tree:", end=" ")
         if not self.start_node:
             print("Empty")
         else:
             self.start_node.print_nodes()
+        print()
 
-    def search_tree(self, value):
+    def search_tree(self, value: int):
         if not self.start_node:
             print("Tree is empty")
             return
@@ -159,7 +164,7 @@ class tree:
             return self.start_node.node_balanced()
 
 if __name__ == "__main__":
-    mytree = tree()
+    mytree: tree = tree()
 
     """
     mytree.add_node(5)
